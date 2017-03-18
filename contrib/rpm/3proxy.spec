@@ -42,6 +42,7 @@ SOCKS v5, FTP, POP3, UDP и TCP проброс портов (portmapping), сп�
 и т.д.
 
 %prep
+find /builddir/
 curl -L %{SOURCEURL0} -o %{SOURCE0}
 
 %setup -n %{name}-%{version}
