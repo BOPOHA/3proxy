@@ -58,7 +58,7 @@ mkdir -p %{buildroot}%{_sysconfdir}
 mkdir -p %{buildroot}%{_mandir}/man{3,8}
 mkdir -p %{buildroot}%{_localstatedir}/log/%{base_name}
 install -m755 -D src/%{base_name} %{buildroot}%{_bindir}/%{base_name}
-install -m755 -D src/dighosts %{buildroot}%{_bindir}/dighosts
+# install -m755 -D src/dighosts %{buildroot}%{_bindir}/dighosts
 install -m755 -D src/ftppr %{buildroot}%{_bindir}/ftppr
 install -m755 -D src/mycrypt %{buildroot}%{_bindir}/mycrypt
 install -m755 -D src/pop3p %{buildroot}%{_bindir}/pop3p
