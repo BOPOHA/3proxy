@@ -42,7 +42,7 @@ SOCKS v5, FTP, POP3, UDP и TCP проброс портов (portmapping), сп�
 и т.д.
 
 %prep
-curl %{SOURCEURL0} -o %{SOURCE0}
+curl -L %{SOURCEURL0} -o %{SOURCE0}
 
 %setup -n %{name}-%{version}
 patch -p0  -s -b <  %{contrib_dir}/3proxy-0.6.1-config-path.patch
