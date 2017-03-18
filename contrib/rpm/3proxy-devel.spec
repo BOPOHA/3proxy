@@ -1,7 +1,7 @@
 %global contrib_dir %{_builddir}/%{name}-%{version}/contrib/rpm/
 %define build_timestamp %(date +"%Y%m%d%H%M")
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} == 1315)
-%define basename 3proxy
+%define base_name 3proxy
 
 Name:           3proxy-devel
 Version:        0.9
@@ -13,7 +13,7 @@ License:        BSD or ASL 2.0 or GPLv2+ or LGPLv2+
 Group:          System Environment/Daemons
 Url:            https://github.com/z3APA3A/3proxy
 
-Source0:        https://github.com/z3APA3A/%{basename}/archive/%{name}-%{version}.tar.gz
+Source0:        https://github.com/z3APA3A/%{base_name}/archive/%{name}-%{version}.tar.gz
 
 BuildRequires:  openssl-devel
 
@@ -28,14 +28,14 @@ Requires:         initscripts
 %endif
 
 %description
-%{basename} -- light proxy server.
+%{base_name} -- light proxy server.
 Universal proxy server with HTTP, HTTPS, SOCKS v4, SOCKS v4a, SOCKS v5, FTP,
 POP3, UDP and TCP portmapping, access control, bandwith control, traffic
 limitation and accounting based on username, client IP, target IP, day time,
 day of week, etc.
 
 %description -l ru
-%{basename} -- маленький прокси сервер.
+%{base_name} -- маленький прокси сервер.
 Это универсальное решение поддерживающее HTTP, HTTPS, SOCKS v4, SOCKS v4a,
 SOCKS v5, FTP, POP3, UDP и TCP проброс портов (portmapping), списки доступа
 управление скоростью доступа, ограничением трафика и статистикоу, базирующейся
@@ -56,23 +56,23 @@ rm -rf %{buildroot}
 
 mkdir -p %{buildroot}%{_sysconfdir}
 mkdir -p %{buildroot}%{_mandir}/man{3,8}
-mkdir -p %{buildroot}%{_localstatedir}/log/%{basename}
-install -m755 -D src/%{basename} %{buildroot}%{_bindir}/%{basename}
+mkdir -p %{buildroot}%{_localstatedir}/log/%{base_name}
+install -m755 -D src/%{base_name} %{buildroot}%{_bindir}/%{base_name}
 install -m755 -D src/dighosts %{buildroot}%{_bindir}/dighosts
 install -m755 -D src/ftppr %{buildroot}%{_bindir}/ftppr
 install -m755 -D src/mycrypt %{buildroot}%{_bindir}/mycrypt
 install -m755 -D src/pop3p %{buildroot}%{_bindir}/pop3p
-install -m755 -D src/%{basename} %{buildroot}%{_bindir}/%{basename}
+install -m755 -D src/%{base_name} %{buildroot}%{_bindir}/%{base_name}
 install -m755 -D src/proxy %{buildroot}%{_bindir}/htproxy
 install -m755 -D src/socks %{buildroot}%{_bindir}/socks
 install -m755 -D src/tcppm %{buildroot}%{_bindir}/tcppm
 install -m755 -D src/udppm %{buildroot}%{_bindir}/udppm
-install -pD -m644 cfg/3proxy.cfg.sample %{buildroot}/%{_sysconfdir}/%{basename}.cfg
+install -pD -m644 cfg/3proxy.cfg.sample %{buildroot}/%{_sysconfdir}/%{base_name}.cfg
 
 %if %{use_systemd}
-install -pD -m755 %{contrib_dir}/%{basename}.service %{buildroot}/%{_unitdir}/%{basename}.service
+install -pD -m755 %{contrib_dir}/%{base_name}.service %{buildroot}/%{_unitdir}/%{base_name}.service
 %else
-install -pD -m755 %{contrib_dir}/%{basename}.init    %{buildroot}/%{_initrddir}/%{basename}
+install -pD -m755 %{contrib_dir}/%{base_name}.init    %{buildroot}/%{_initrddir}/%{base_name}
 %endif
 
 for man in man/*.{3,8} ; do
@@ -84,32 +84,32 @@ rm -rf %{buildroot}
 
 %post
 %if %{use_systemd}
-%systemd_post %{basename}.service
+%systemd_post %{base_name}.service
 %endif
 
 %preun
 %if %{use_systemd}
-%systemd_preun %{basename}.service
+%systemd_preun %{base_name}.service
 %endif
 
 %postun
 %if %{use_systemd}
-%systemd_postun_with_restart %{basename}.service
+%systemd_postun_with_restart %{base_name}.service
 %endif
 
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%config(noreplace) %{_sysconfdir}/%{basename}.cfg
-%{_localstatedir}/log/%{basename}
+%config(noreplace) %{_sysconfdir}/%{base_name}.cfg
+%{_localstatedir}/log/%{base_name}
 %doc README authors copying Release.notes
 %{_mandir}/man8/*.8.gz
 %{_mandir}/man3/*.3.gz
 
 %if %{use_systemd}
-%{_unitdir}/%{basename}.service
+%{_unitdir}/%{base_name}.service
 %else
-%{_initrddir}/%{basename}
+%{_initrddir}/%{base_name}
 %endif
 
 %changelog
