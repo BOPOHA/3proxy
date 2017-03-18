@@ -3,7 +3,7 @@
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (0%{?suse_version} == 1315)
 %define basename 3proxy
 
-Name:           %{basename}-devel
+Name:           3proxy-devel
 Version:        0.9
 Release:        git%{build_timestamp}%{?dist}
 Summary:        Tiny but very powerful proxy
